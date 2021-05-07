@@ -1,0 +1,16 @@
+{% extends 'vue.html.twig' %}
+
+{% block title %}Zerrendaren jarraipena{% endblock %}
+
+{%  block stylesheets %}
+
+    {{ parent() }}
+    {{ encore_entry_link_tags('jsVueApp') }}
+
+
+{% endblock %}
+
+{% block sf_data %}
+    <div ref="job" data-job="{{ job|e }}"></div>
+    <div ref="erantzunak" data-erantzunak="{{ erantzunak|e }}"></div>
+{% endblock %}

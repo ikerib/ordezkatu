@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Municipio{% endblock %}
+
+{% block body %}
+
+    <table class="mydatatable table table-striped table-hover table-sm">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Provincia</th>
+                <th>Codpostal</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for municipio in municipios %}
+            <tr>
+                <td>{{ municipio.id }}</td>
+                <td>{{ municipio.name }}</td>
+                <td>{{ municipio.provincia }}</td>
+                <td>{{ municipio.codpostal }}</td>
+                <td>{{ municipio.latitud }}</td>
+                <td>{{ municipio.longitud }}</td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
