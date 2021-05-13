@@ -27,7 +27,7 @@
                             ---
                         {% endif %}</td>
                     <td>{% if ezt.type %}{{ ezt.type.name }}{% else %}---{% endif %}</td>
-                    <td>{{ vich_uploader_asset(ezt,'documentFile') }}</td>
+                    <td><a href="{{ vich_uploader_asset(ezt,'documentFile') }}" target="_blank">Ikusi</a></td>
                 </tr>
             {% endfor %}
             </tbody>
