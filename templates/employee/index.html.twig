@@ -31,6 +31,7 @@
                 <th>{{ "Telefonoa" | trans }}</th>
                 <th>Elkarkidetza</th>
                 <th>{{ "Zerrendak" | trans }}</th>
+                <th>Egoera</th>
                 <th></th>
             </tr>
         </thead>
@@ -58,9 +59,20 @@
                 </td>
                 <td>
                     {% for zer in employee.employeezerrenda %}
-                        {% if zer.zerrenda %}
-                            <span class="badge badge-secondary"><a class="text-white" href="{{ path('zerrenda_show', {'id': zer.zerrenda.id}) }}">{{zer.zerrenda.name}}</a></span>
-                        {% endif %}
+                        <ul class="list-unstyled">
+                            {% if zer.zerrenda %}
+                                <li><span class="badge badge-secondary"><a class="text-white" href="{{ path('zerrenda_show', {'id': zer.zerrenda.id}) }}">{{zer.zerrenda.name}}</a></span></li>
+                            {% endif %}
+                        </ul>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for zer in employee.employeezerrenda %}
+                        <ul class="list-unstyled">
+                            {% if zer.zerrenda %}
+                                <li><span class="badge badge-secondary"><a class="text-white">{{zer.type}}</a></span></li>
+                            {% endif %}
+                        </ul>
                     {% endfor %}
                 </td>
                 <td>
