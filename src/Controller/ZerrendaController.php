@@ -101,12 +101,10 @@ class ZerrendaController extends AbstractController
         /** @var Zerrenda $zerrenda */
         $zerrenda   = $zerrendaRepository->findZerrendaBat( $id );
         $types = $typeRepository->findAll();
-        $jobs = $jobRepository->findAll();
 
         return $this->render('zerrenda/show.html.twig', [
             'zerrenda'  => $serializer->serialize($zerrenda, 'json',  ['groups' => 'main']),
-            'types'     => $serializer->serialize($types, 'json',  ['groups' => 'main']),
-            'jobs'      => $serializer->serialize($jobs, 'json',  ['groups' => 'main']),
+            'types'     => $serializer->serialize($types, 'json',  ['groups' => 'main'])
         ]);
     }
 
