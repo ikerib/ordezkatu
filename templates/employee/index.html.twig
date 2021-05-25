@@ -70,7 +70,7 @@
                     {% for zer in employee.employeezerrenda %}
                         <ul class="list-unstyled">
                             {% if zer.zerrenda %}
-                                <li><span class="badge badge-secondary"><a class="text-white">{{zer.type}}</a></span></li>
+                                <li><span class="badge badge-secondary"><a class="text-white">{{zer.type}} ({{ zer.updated | date('Y-m-d') }})</a></span></li>
                             {% endif %}
                         </ul>
                     {% endfor %}
