@@ -10,6 +10,7 @@ use App\Entity\Zerrenda;
 use App\Form\ZerrendaInportType;
 use App\Form\ZerrendaTemplateType;
 use App\Form\ZerrendaType;
+use App\Repository\JobRepository;
 use App\Repository\TypeRepository;
 use App\Repository\ZerrendaRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -94,14 +95,18 @@ class ZerrendaController extends AbstractController
     public function show($id,
                          TypeRepository $typeRepository,
                          ZerrendaRepository $zerrendaRepository,
+                         JobRepository $jobRepository,
                          SerializerInterface $serializer): Response
     {
+        /** @var Zerrenda $zerrenda */
         $zerrenda   = $zerrendaRepository->findZerrendaBat( $id );
         $types = $typeRepository->findAll();
+        $jobs = $jobRepository->findAll();
 
         return $this->render('zerrenda/show.html.twig', [
-            'zerrenda'  =>$serializer->serialize($zerrenda, 'json',  ['groups' => 'main']),
-            'types'     =>$serializer->serialize($types, 'json',  ['groups' => 'main'])
+            'zerrenda'  => $serializer->serialize($zerrenda, 'json',  ['groups' => 'main']),
+            'types'     => $serializer->serialize($types, 'json',  ['groups' => 'main']),
+            'jobs'      => $serializer->serialize($jobs, 'json',  ['groups' => 'main']),
         ]);
     }
 

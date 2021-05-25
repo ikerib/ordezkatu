@@ -25,3 +25,4 @@ docker/data
 /docker/redis-data/
 .idea
 docker-compose.override.yml
+/fakewebpack.config.js

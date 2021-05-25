@@ -1,4 +1,4 @@
-{% extends 'vue.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Zerrendaren jarraipena{% endblock %}
 
@@ -13,5 +13,7 @@
 {% block sf_data %}
     <div ref="zerrenda" data-zerrenda="{{ zerrenda|e }}"></div>
     <div ref="types" data-types="{{ types|e }}"></div>
+    <div ref="jobs" data-types="{{ jobs|e }}"></div>
+
 {#    <div ref="logs" data-logs="{{ logs|e }}"></div>#}
 {% endblock %}

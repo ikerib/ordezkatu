@@ -185,31 +185,6 @@ class Job
         return $this;
     }
 
-    /**
-     * @return Collection|Zerrenda[]
-     */
-    public function getZerrenda(): Collection
-    {
-        return $this->zerrenda;
-    }
-
-    public function addZerrenda(Zerrenda $zerrenda): self
-    {
-        if (!$this->zerrenda->contains($zerrenda)) {
-            $this->zerrenda[] = $zerrenda;
-        }
-
-        return $this;
-    }
-
-    public function removeZerrenda(Zerrenda $zerrenda): self
-    {
-        if ($this->zerrenda->contains($zerrenda)) {
-            $this->zerrenda->removeElement($zerrenda);
-        }
-
-        return $this;
-    }
 
     public function getSaila(): ?Saila
     {
