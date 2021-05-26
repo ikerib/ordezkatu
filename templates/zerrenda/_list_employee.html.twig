@@ -3,6 +3,7 @@
     <thead>
     <tr>
         <th>{{ "Hurrenkera" | trans }}</th>
+        <th>{{ "Egoera" | trans }}</th>
         <th>{{ "Izena" | trans }}</th>
         <th>{{ "1º Abizena" | trans }}</th>
         <th>{{ "2º Abizena" | trans }}</th>
@@ -18,6 +19,15 @@
         {% if item.employee %}
             <tr>
                 <td>{{ item.position }}</td>
+                <td>
+                    {% for zer in employeeZerrenda %}
+                        {% if zer.employee.id == item.id %}
+                            {% if zer.zerrenda %}
+                                <span class="badge badge-secondary"><a class="text-white" href="{{ path('employee_edit', {'id': item.employee.id}) }}">{{zer.type}} ({{ zer.updated | date('Y-m-d') }})</a></span>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </td>
                 <td><a href="{{ path('employee_edit', {'id': item.employee.id}) }}">{{ item.employee.name }}</a></td>
                 <td><a href="{{ path('employee_edit', {'id': item.employee.id}) }}">{{ item.employee.abizena1 }}</a></td>
                 <td><a href="{{ path('employee_edit', {'id': item.employee.id}) }}">{{ item.employee.abizena2 }}</a></td>
@@ -38,7 +48,7 @@
                         </li>
                         {% if app.request.get('_route') is same as ('zerrenda_edit') %}
                             <li class="list-inline-item">
-                                <a href="#">Egoera aldatu</a>
+                                <a href="{{ path('employee_show', {'id': item.employee.id}) }}">Egoera aldatu</a>
                             </li>
                         {% endif %}
                     </ul>
