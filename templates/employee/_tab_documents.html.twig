@@ -12,6 +12,7 @@
                 <th>Aurreko egoera</th>
                 <th>Egoera berria</th>
                 <th>Dokumentua</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -27,7 +28,17 @@
                             ---
                         {% endif %}</td>
                     <td>{% if ezt.type %}{{ ezt.type.name }}{% else %}---{% endif %}</td>
-                    <td><a href="{{ vich_uploader_asset(ezt,'documentFile') }}" target="_blank">Ikusi</a></td>
+                    <td>
+                        {% if ezt.documentFile %}
+                            <a href="{{ vich_uploader_asset(ezt,'documentFile') }}" target="_blank">Ikusi</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="btnZerrendaType"
+                           data-employeeid="{{ ezt.employee.id }}"
+                           data-zerrendaid="{{ ezt.zerrenda }}"
+                           href="#">Egoera aldatu</a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
