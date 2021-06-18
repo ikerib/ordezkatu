@@ -140,8 +140,8 @@ class JobController extends AbstractController
 
 
         return $this->render('job/show.html.twig', [
-            'job'       => $serializer->serialize($job, 'json',  ['groups' => 'main']),
-            'erantzunak'     => $serializer->serialize($erantzunak, 'json',  ['groups' => 'main']),
+            'job'           => $serializer->serialize($job, 'json',  ['groups' => 'main']),
+            'erantzunak'    => $serializer->serialize($erantzunak, 'json',  ['groups' => 'main']),
         ]);
     }
 

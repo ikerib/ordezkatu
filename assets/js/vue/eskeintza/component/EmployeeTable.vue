@@ -38,7 +38,11 @@
             <table class="table selectedEmployeesTable">
                 <thead>
                 <tr>
-                    <th></th>
+                    <th>
+                      <button class="btn btn-sm btn-danger" @click="removeAllSelectedEmployee()">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </th>
                     <th>Pos</th>
                     <th>Izena</th>
                     <th>Abizenak</th>
@@ -100,6 +104,9 @@
             },
             removeFromSelectedEmployee(e) {
                 this.$store.dispatch("ACTION_REMOVE_EMPLOYEE_FROM_LIST", e);
+            },
+            removeAllSelectedEmployee() {
+              this.$store.dispatch("ACTION_REMOVE_ALL_EMPLOYEE_FROM_LIST");
             },
             isChecked(e) {
                 return this.$store.getters.GET_IS_SELECTED(e);

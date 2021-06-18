@@ -40,11 +40,21 @@ const actions = {
             console.log(e)
         }
     },
-    ACTION_DO_CHECK_ALL: ( state) => {
+    ACTION_DO_CHECK_ALL: async ( state) => {
         const available = state.getters.GET_AVAILABLEEMPLOYEEELIST;
-        available.forEach(item => {
-            state.dispatch('ACTION_ADD_REMOVE_EMPLOYEE_TO_LIST', item)
+        Swal.fire({
+            type: 'info',
+            title: 'Lanean!',
+            text: 'Itxaron momentu bat...',
+            showConfirmButton: false
         })
+        const promises = [];
+        available.forEach(item => {
+            promises.push(state.dispatch('ACTION_ADD_REMOVE_EMPLOYEE_TO_LIST', item))
+        })
+        const outputs = await Promise.all(promises);
+        outputs.forEach((result) => console.log(result));
+        Swal.close();
     },
     ACTION_GET_JOB: async (state, jobid) => {
         const urlJobDetails = Routing.generate("get_job", { 'id': jobid});
@@ -73,6 +83,29 @@ const actions = {
                      timer: 300
                  });
                  state.dispatch('ACTION_GET_JOB', state.getters.GET_JOBID)
+            }
+        } catch ( e ) {
+            console.log(e);
+            await Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Arazo bat egon da. Jarri harremanetan informatika sailarekin"
+            });
+        }
+    },
+    ACTION_REMOVE_ALL_EMPLOYEE_FROM_LIST: async( state, payload ) => {
+        const removeURL = Routing.generate("delete_all_jobdetail", { "id": state.getters.GET_JOBID });
+        try {
+            let res = await axios.delete(removeURL);
+            if ( res.status === 204 ) {
+                await Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Aldaketak ongi gorde dira",
+                    showConfirmButton: false,
+                    timer: 300
+                });
+                state.dispatch('ACTION_GET_JOB', state.getters.GET_JOBID)
             }
         } catch ( e ) {
             console.log(e);

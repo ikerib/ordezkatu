@@ -29,10 +29,10 @@
         <hr>
         <div class="row">
             <div class="col-md-6">
-                <EmployeeTable :use-for="'selection'"></EmployeeTable>
+                <EmployeeTable  :use-for="'selection'"></EmployeeTable>
             </div>
             <div class="col-md-6">
-                <EmployeeTable :use-for="'selected'"></EmployeeTable>
+                <EmployeeTable  :use-for="'selected'"></EmployeeTable>
             </div>
         </div>
 

@@ -9,6 +9,7 @@ use App\Entity\Job;
 use App\Entity\JobDetail;
 use App\Entity\Zerrenda;
 use App\Repository\JobDetailRepository;
+use App\Repository\JobRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -100,6 +101,23 @@ class ApiJobController extends AbstractFOSRestController
         $this->em->remove($jobDetail);
 
         $jobDetailRepository->updatePosition( $jobid, $position );
+        $this->em->flush();
+
+        return View::create(null, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @Rest\Delete("/job/{id}/delete_all_details", name="delete_all_jobdetail", options={ "expose": true})
+     *
+     * @param Job $job
+     * @param JobRepository $jobRepository
+     * @return View
+     */
+    public function deleteallJobdetail(Job $job, JobRepository $jobRepository): View
+    {
+        foreach ($job->getJobDetails() as $jobDetail) {
+            $this->em->remove($jobDetail);
+        }
         $this->em->flush();
 
         return View::create(null, Response::HTTP_NO_CONTENT);
