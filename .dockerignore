@@ -1,5 +1,11 @@
-var/
-vendor/
-docker/
-Dockerfile
-/docker/data/
+.git
+.idea
+.env
+.env.prod
+node_modules
+vendor
+tmp
+public/uploads
+storage/framework/cache/**
+storage/framework/sessions/**
+storage/framework/views/**
