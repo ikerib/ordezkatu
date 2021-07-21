@@ -3,6 +3,7 @@
 .env
 .env.prod
 node_modules
+var
 vendor
 tmp
 public/uploads

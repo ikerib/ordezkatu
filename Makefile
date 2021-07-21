@@ -42,7 +42,7 @@ build:
 	@echo '----------------------------------------------------------------------'
 	cp -r ~/docker_temp/app ./docker_temp/
 	#mv ./docker_temp/docker_temp ./docker_temp/app
-	docker build -t ${DOCKER_REPO_APP} --file=docker/prod/php/Dockerfile .
+	docker build --force-rm -t ${DOCKER_REPO_APP} --file=docker/prod/php/Dockerfile .
 	rm -fr ./docker_temp/
 	@echo
 	@echo
@@ -60,7 +60,7 @@ deploy: build
 
 	# docker build -t ${DOCKER_REPO_APP} --file=docker/prod/php/Dockerfile .
 	
-	docker build -t ${DOCKER_REPO_NGINX} --file=docker/prod/nginx/Dockerfile .
+	docker build --force-rm -t ${DOCKER_REPO_NGINX} --file=docker/prod/nginx/Dockerfile .
 	docker push ${DOCKER_REPO_NGINX}
 	docker push ${DOCKER_REPO_APP}
 
