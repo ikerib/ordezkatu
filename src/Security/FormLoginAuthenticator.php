@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Service\PasaiaLdapService;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -43,14 +44,16 @@ class FormLoginAuthenticator extends AbstractFormLoginAuthenticator
      * @var EntityManagerInterface
      */
     private $em;
+    private $logger;
 
-    public function __construct(UserRepository $userRepository, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager, PasaiaLdapService $pasaiaLdapSrv, EntityManagerInterface $em)
+    public function __construct(UserRepository $userRepository, RouterInterface $router, CsrfTokenManagerInterface $csrfTokenManager, PasaiaLdapService $pasaiaLdapSrv, EntityManagerInterface $em, LoggerInterface $logger)
     {
         $this->userRepository = $userRepository;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->pasaiaLdapSrv = $pasaiaLdapSrv;
         $this->em = $em;
+        $this->logger = $logger;
     }
 
     public function supports(Request $request): bool
@@ -79,20 +82,26 @@ class FormLoginAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         $dbUser = $this->userRepository->findOneBy(['username' => $credentials['_username']]);
-
+        $this->logger->info('-------------------------------------------------------------------------------');
+        $this->logger->info('Datu basean ez dago');
+        $this->logger->info('-------------------------------------------------------------------------------');
         if (!$dbUser) {
             // User is not present in the Database, let's create it
+            $this->logger->info('Erabiltzailea datu basean sortzen');
             return $this->pasaiaLdapSrv->createDbUserFromLdapData($credentials['_username']);
         }
 
         // The User exists in the database, let's update it's data
+        $this->logger->info('Datu basearen datuak eguneratzen');
         return $this->pasaiaLdapSrv->updateDbUserDataFromLdapByUsername($credentials['_username']);
     }
 
     public function checkCredentials($credentials, UserInterface $user): bool
     {
         $bbn = $this->pasaiaLdapSrv->checkCredentials($credentials['_username'], $credentials['_password']);
-
+        $this->logger->info('-------------------------------------------------------------------------------');
+        $this->logger->info("checkCredentials => Emaitza: $bbn");
+        $this->logger->info('-------------------------------------------------------------------------------');
         return  $bbn;
     }
 
