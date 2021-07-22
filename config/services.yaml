@@ -41,6 +41,8 @@ services:
             - '%env(resolve:LDAP_SEARCH_DN)%'
             - '%env(resolve:LDAP_BASE_DN)%'
             - '%env(resolve:LDAP_PASSWD)%'
+            - '@doctrine.orm.entity_manager'
+            - '@logger'
 
     pasaia.vich.directory.namer:
         class: App\Service\PasaiaVichDirectoryNamer

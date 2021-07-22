@@ -41,6 +41,7 @@ services:
         build:
             context: ./
             dockerfile: docker/dev/nginx/Dockerfile
+
         depends_on:
             - app
         ports:

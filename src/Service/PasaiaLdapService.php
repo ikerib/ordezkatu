@@ -6,6 +6,7 @@ namespace App\Service;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Ldap\Adapter\ExtLdap\Adapter;
 use Symfony\Component\Ldap\Entry;
 use Symfony\Component\Ldap\Exception\ConnectionException;
@@ -18,15 +19,17 @@ class PasaiaLdapService
     private $basedn;
     private $passwd;
     private $em;
+    private $loger;
 
 
-    public function __construct($ip, $ldap_username, $basedn, $passwd, EntityManagerInterface $em)
+    public function __construct($ip, $ldap_username, $basedn, $passwd, EntityManagerInterface $em, LoggerInterface $logger)
     {
         $this->ip            = $ip;
         $this->ldap_username = $ldap_username;
         $this->basedn        = $basedn;
         $this->passwd        = $passwd;
         $this->em            = $em;
+        $this->loger         = $logger;
     }
 
     public function checkCredentials($username, $password): bool
@@ -94,7 +97,9 @@ class PasaiaLdapService
      */
     private function syncUserInfoFromLdap(User $user, $ldapData): User
     {
-
+        $this->loger->info('-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-');
+        $this->loger->info('syncUserInfoFromLdap');
+        $this->loger->info('-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-');
         $ldap = $ldapData->getAttributes();
 
         if (array_key_exists('employeeID', $ldap)) {
