@@ -10,4 +10,4 @@ public/uploads
 storage/framework/cache/**
 storage/framework/sessions/**
 storage/framework/views/**
-docker/
+docker/prod/nginx/ssl/
