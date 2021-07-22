@@ -104,4 +104,5 @@ docker-compose.override.yml
 /tmp/
 /public/uploads/
 /docker/dev/php/conf/.zsh_history
+/docker/prod/nginx/ssl
 /docker_temp/
