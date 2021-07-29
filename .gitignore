@@ -106,3 +106,4 @@ docker-compose.override.yml
 /docker/dev/php/conf/.zsh_history
 /docker/prod/nginx/ssl
 /docker_temp/
+/docker/ssl

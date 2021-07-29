@@ -9,8 +9,8 @@ ARG DEBUGMODE=1
 ENV PS1="\u@\h:\w\\$ "
 
 RUN echo "user:x:$USER_ID:$USER_ID::/home/www-data:" >> /etc/passwd \
-    echo "user:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow
-    echo "user:x:$USER_ID:" >> /etc/group
+    echo "user:!:$(($(date +%s) / 60 / 60 / 24)):0:99999:7:::" >> /etc/shadow \
+    echo "user:x:$USER_ID:" >> /etc/group \
     mkdir /home/www-data && chown www-data: /home/www-data
 
 RUN echo "${DOCKER_TIMEZONE}" > /etc/timezone
